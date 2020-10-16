@@ -7,3 +7,6 @@ The firmware uses several libraries, including:
 3. LiquidCrystal I2C Library (https://github.com/johnrickman/LiquidCrystal_I2C)
 4. Software Serial Library (built-in Arduino)
 5. EEPROM Library (buil-in Arduino)
+
+Schematic for this project:
+![schematic](Shematic.png)
