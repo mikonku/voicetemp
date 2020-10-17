@@ -99,6 +99,66 @@ void VOLUME (int VOL) {
   
 }
 
+void THRESH (int VOL) {
+  
+  while(true) {
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      menuSetting();    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      if(VOL<40) VOL++;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      if(VOL>30) VOL--;    
+    }
+    SET.Thresh = VOL;
+    lcd.setCursor(0,1);
+    lcd.print("THRESHOLD = ");
+    lcd.print(VOL);
+
+  }
+  
+}
+
+void CORRECT (int VOL) {
+  
+  while(true) {
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      menuSetting();    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      if(VOL<10) VOL++;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      if(VOL>-1) VOL--;    
+    }
+    SET.Callib = VOL;
+    lcd.setCursor(0,1);
+    lcd.print("CORRECTION = ");
+    lcd.print(VOL);
+
+  }
+  
+}
+
 void HAND_WASHER(int HW) {
   while(true){
       if(digitalRead(OK) == STATE){

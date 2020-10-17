@@ -9,8 +9,11 @@
 #define STATE            LOW
 #define BOUNCE           50
 
-#define SanitizeSENS     A2  //pin sensor jarak
+#define TempSENS         A2
+#define SanitizeSENS     A3  //pin sensor jarak
 #define TRESHHOLD        38  //suhu batas
+
+#define RELAY            7
 
 #define buusyPin         12   //pin busy DFPLAYER
 int bsy = 0;
@@ -30,10 +33,12 @@ bool sens = false;
 #include "symbols.h" 
 
 struct SETTINGS {
-  int   alertMode;
   bool  language;
+  int   alertMode;
   int   volume;
   int   modeSanitize;
+  int   Callib;
+  int   Thresh;
 };
 
 SETTINGS SET;
@@ -57,8 +62,6 @@ LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 
-
-#define RELAY 5
 
 
 void printDetail(uint8_t type, int value);

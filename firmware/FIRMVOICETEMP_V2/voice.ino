@@ -34,7 +34,7 @@ void voice(float t)
     return;
   } 
   
-  else if(t>TRESHHOLD && t<100){
+  else if(t>SET.Thresh && t<100){
     myDFPlayer.playMp3Folder(2);
     delayVoice();
     //Serial.println("ANDA SAKIT");

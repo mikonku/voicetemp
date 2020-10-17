@@ -18,6 +18,10 @@ void washer(int type) {
   }
   else if(type == 2) {
     Serial.println(F("WATER"));
+    while(TempSENS==false) {
+      digitalWrite(RELAY, HIGH);
+      delay(100);
+    }
   }
   else if(type == 3) {
     Serial.println(F("SANITIZER"));   
