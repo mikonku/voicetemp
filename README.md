@@ -9,4 +9,4 @@ The firmware uses several libraries, including:
 5. EEPROM Library (buil-in Arduino)
 
 Schematic for this project:
-![schematic](Shematic.png)
+![schematic](Schematic.png)
