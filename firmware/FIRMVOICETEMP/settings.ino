@@ -16,7 +16,7 @@ void MODE (int MOD) {
         delay(BOUNCE);
         while(digitalRead(DOWN) == STATE) {}
         lcd.clear();
-        (MOD<1)?MOD=3:MOD--;    
+        (MOD<2)?MOD=2:MOD--;    
       }
 
       SET.alertMode = MOD;
@@ -32,10 +32,7 @@ void MODE (int MOD) {
         lcd.setCursor(3,1);
         lcd.print(" VOICE ");
       }
-//      else if(MOD == 3) {
-//        lcd.setCursor(3,1);
-//        lcd.print(" FULL  ");
-//      }
+      
       //Serial.print(MOD);
   }
   
@@ -100,4 +97,106 @@ void VOLUME (int VOL) {
 
   }
   
+}
+
+void THRESH (int VOL) {
+  
+  while(true) {
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      menuSetting();    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      if(VOL<40) VOL++;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      if(VOL>30) VOL--;    
+    }
+    SET.Thresh = VOL;
+    lcd.setCursor(0,1);
+    lcd.print("THRESHOLD = ");
+    lcd.print(VOL);
+
+  }
+  
+}
+
+void CORRECT (int VOL) {
+  
+  while(true) {
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      menuSetting();    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      if(VOL<10) VOL++;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      if(VOL>-1) VOL--;    
+    }
+    SET.Callib = VOL;
+    lcd.setCursor(0,1);
+    lcd.print("CORRECTION = ");
+    lcd.print(VOL);
+
+  }
+  
+}
+
+void HAND_WASHER(int HW) {
+  while(true){
+      if(digitalRead(OK) == STATE){
+        delay(BOUNCE);
+        while(digitalRead(OK) == STATE) {}
+        lcd.clear();
+        menuSetting();
+      }
+      else if(digitalRead(UP) == STATE){
+        delay(BOUNCE);
+        while(digitalRead(UP) == STATE) {}
+        lcd.clear();
+        (HW>2)?HW=1:HW++;    
+      }
+      else if(digitalRead(DOWN) == STATE){
+        delay(BOUNCE);
+        while(digitalRead(DOWN) == STATE) {}
+        lcd.clear();
+        (HW<2)?HW=3:HW--;    
+      }
+
+      SET.modeSanitize = HW;
+      lcd.setCursor(0,0);
+      lcd.print("WASHER MODE?  ");
+      
+      if(HW == 1) {
+
+        lcd.setCursor(3,1);
+        lcd.print(" OFF");   
+      }
+      else if(HW == 2) {
+        lcd.setCursor(3,1);
+        lcd.print(" WATER ");
+      }
+      else if(HW == 3) {
+        lcd.setCursor(3,1);
+        lcd.print(" SANITIZER  ");
+      }
+      //Serial.print(HW);
+  }
 }

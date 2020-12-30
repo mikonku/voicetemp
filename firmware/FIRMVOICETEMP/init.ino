@@ -16,7 +16,9 @@ void initialize() {
 
 
   pinMode(buusyPin, INPUT);
-  pinMode(TSENS, INPUT);
+  pinMode(SanitizeSENS, INPUT);
+  pinMode(TempSENS, INPUT);
+  pinMode(RELAY, OUTPUT);
   
   pinMode(OK, INPUT_PULLUP);
   pinMode(UP, INPUT_PULLUP);

@@ -64,7 +64,7 @@ void menuSetting(){
       delay(BOUNCE);
       while(digitalRead(UP) == STATE) {}
       lcd.clear();
-      goto setMenu4;    
+      goto setMenu7;    
     }
     else if(digitalRead(DOWN) == STATE){
       delay(BOUNCE);
@@ -141,6 +141,7 @@ void menuSetting(){
       delay(BOUNCE);
       while(digitalRead(DOWN) == STATE) {}
       lcd.clear();
+      fromUP = true;
       goto setMenu4;    
     }
 
@@ -150,7 +151,7 @@ void menuSetting(){
       lcd.print("VOLUME");
       lcd.setCursor(0,1);
       //lcd.write(PLAY);
-      lcd.print(" CLOSE");
+      lcd.print(" HAND WASHER");
     } else {
       lcd.setCursor(0,0);
       //lcd.write(PLAY);
@@ -160,9 +161,132 @@ void menuSetting(){
       lcd.print("VOLUME");
     }    
     goto setMenu3;
-
     
   setMenu4:
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      HAND_WASHER(SET.modeSanitize);    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      fromUP = false;
+      goto setMenu3;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      goto setMenu5;    
+    }
+//    lcd.setCursor(0,0);
+//    //lcd.write(PLAY);
+//    lcd.print(" VOLUME");
+//    lcd.setCursor(0,1);
+//    lcd.write(PLAY);
+//    lcd.print("CLOSE ");
+
+    if(fromUP == false){
+      lcd.setCursor(0,0);
+      lcd.write(PLAY);
+      lcd.print("HAND WASHER");
+      lcd.setCursor(0,1);
+      //lcd.write(PLAY);
+      lcd.print(" CORRECTION");
+    } else {
+      lcd.setCursor(0,0);
+      //lcd.write(PLAY);
+      lcd.print(" VOLUME");
+      lcd.setCursor(0,1);
+      lcd.write(PLAY);
+      lcd.print("HAND WASHER");
+    }    
+    
+    goto setMenu4; 
+
+
+  setMenu5:
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      CORRECT (SET.volume);    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      fromUP = false;
+      goto setMenu4;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      fromUP = true;
+      goto setMenu6;    
+    }
+
+    if(fromUP == false){
+      lcd.setCursor(0,0);
+      lcd.write(PLAY);
+      lcd.print("CORRECTION");
+      lcd.setCursor(0,1);
+      //lcd.write(PLAY);
+      lcd.print(" THRESHOLD");
+    } else {
+      lcd.setCursor(0,0);
+      //lcd.write(PLAY);
+      lcd.print(" HAND WASHER");
+      lcd.setCursor(0,1);
+      lcd.write(PLAY);
+      lcd.print("CORRECTION");
+    }    
+    goto setMenu5;
+
+  setMenu6:
+    if(digitalRead(OK) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(OK) == STATE) {}
+      lcd.clear();
+      THRESH (SET.Thresh);    
+    }
+    else if(digitalRead(UP) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(UP) == STATE) {}
+      lcd.clear();
+      fromUP = false;
+      goto setMenu5;    
+    }
+    else if(digitalRead(DOWN) == STATE){
+      delay(BOUNCE);
+      while(digitalRead(DOWN) == STATE) {}
+      lcd.clear();
+      fromUP = true;
+      goto setMenu7;    
+    }
+
+    if(fromUP == false){
+      lcd.setCursor(0,0);
+      lcd.write(PLAY);
+      lcd.print("THRESHOLD");
+      lcd.setCursor(0,1);
+      //lcd.write(PLAY);
+      lcd.print(" CLOSE");
+    } else {
+      lcd.setCursor(0,0);
+      //lcd.write(PLAY);
+      lcd.print(" CORRECTION");
+      lcd.setCursor(0,1);
+      lcd.write(PLAY);
+      lcd.print("THRESHOLD");
+    }    
+    goto setMenu6;
+
+  setMenu7:
     if(digitalRead(OK) == STATE){
       delay(BOUNCE);
       while(digitalRead(OK) == STATE) {}
@@ -174,7 +298,7 @@ void menuSetting(){
       delay(BOUNCE);
       while(digitalRead(UP) == STATE) {}
       lcd.clear();
-      goto setMenu3;    
+      goto setMenu6;    
     }
     else if(digitalRead(DOWN) == STATE){
       delay(BOUNCE);
@@ -184,12 +308,12 @@ void menuSetting(){
     }
     lcd.setCursor(0,0);
     //lcd.write(PLAY);
-    lcd.print(" VOLUME");
+    lcd.print(" THRESHOLD");
     lcd.setCursor(0,1);
     lcd.write(PLAY);
     lcd.print("CLOSE ");
     
-    goto setMenu4; 
+    goto setMenu7; 
 }
 
 void checkButton(){
@@ -200,10 +324,7 @@ void checkButton(){
     if( digitalRead(OK) == STATE ){
       Serial.println(F("Button Pressed"));
       // still holding button for 3000 ms, reset settings, code not ideaa for production
-      delay(3000); // reset delay hold
-      
-      
-      
+      delay(3000); // reset delay hold  
       if( digitalRead(OK) == STATE ){
         loadSetting();
         while(digitalRead(OK) == STATE) {}

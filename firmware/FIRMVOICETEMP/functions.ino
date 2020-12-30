@@ -12,6 +12,21 @@ void loadSetting(){
   lcd.clear();
 }
 
+void washer(int type) {
+  if(type == 1) {
+    Serial.println(F("OFF"));
+  }
+  else if(type == 2) {
+    Serial.println(F("WATER"));
+    while(TempSENS==false) {
+      digitalWrite(RELAY, HIGH);
+      delay(100);
+    }
+  }
+  else if(type == 3) {
+    Serial.println(F("SANITIZER"));   
+  } 
+}
 
 void printDetail(uint8_t type, int value){
   switch (type) {

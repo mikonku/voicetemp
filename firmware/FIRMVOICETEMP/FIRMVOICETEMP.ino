@@ -1,8 +1,7 @@
 #include "preambles.h"
 
 void setup() {
-  pinMode(RELAY, OUTPUT);
-  
+  //SET.Thresh = 30;
   initialize();
 }
 
